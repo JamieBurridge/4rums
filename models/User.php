@@ -3,6 +3,8 @@
 class User
 {
     private $db;
+    private $login_error_message = "Oops, there was a problem logging in!";
+    private $signup_error_message = "Oops! There was an error creating your account";
 
     public function __construct($db)
     {
@@ -21,13 +23,13 @@ class User
         }
         catch (PDOException $error)
         {
-            return array("error"=> "Oops! There was an error creating your account"); 
+            return array("error" => $this->signup_error_message); 
         }
     }
 
     public function getUsers()
     {
-        $query = "SELECT * FROM users";
+        $query = "SELECT username FROM users";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,12 +55,14 @@ class User
                     return array("username" => $username, "error" => null);
                 }
 
-                return array("username" => null, "error" => "Oops, there was a problem logging in!");
+                return array("username" => null, "error" => $this->login_error_message);
             }
+
+            return array("username" => null, "error" => $this->login_error_message);
         }
         catch (PDOException $error)
         {
-            return array("username" => null, "error" => "Oops, there has been an error!");
+            return array("username" => null, "error" => $this->login_error_message);
         }
     }
 }

@@ -1,11 +1,10 @@
 <?php
     require_once "database.php";
     require_once "models/User.php";
-
-    session_start();
+    require_once "helpers/auth.php";
 
     $user_model = new User($conn);
-    $login_error_message;
+    $login_error_message = "";
 
     try 
     {
@@ -14,23 +13,14 @@
             $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $user = $user_model->authenticateUser($username, $password);
-
-            if ($user["username"]) 
-            {
-                $_SESSION["username"] = $user["username"];
-                header("Location: /4rums/pages/board.php");
-                exit();
-            } else {
-                $login_error_message = $user["error"];
-            }
+            $login_response = handleLogin($username, $password, $user_model, $login_error_message);
+            $login_error_message = $login_response["error"];
         }
     } 
     catch (Exception $error) 
     {
         $login_error_message = "Oops! An unexpected error occurred";
     }
-
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">

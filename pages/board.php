@@ -1,5 +1,5 @@
 <?php
-    require_once "../helpers/user/user.php";
+    require_once "../helpers/user.php";
 
     use User;
     $username = User\getUsername();

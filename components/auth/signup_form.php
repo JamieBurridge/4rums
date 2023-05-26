@@ -1,9 +1,10 @@
 <?php 
     require_once "database.php";
     require_once "models/User.php";
+    require_once "helpers/auth.php";
 
     $user_model = new User($conn);
-    $signup_error_message;
+    $signup_error_message = "";
 
     try 
     {
@@ -17,18 +18,22 @@
             if ($new_user["error"])
             {
                 $signup_error_message = $new_user["error"];
+            } 
+            else 
+            {
+                // Immediately login after creating an account
+                $signup_response = handleLogin($username, $password, $user_model, $signup_error_message);
+                $signup_error_message = $signup_response["error"];
             }
         }
-    
     }
     catch (Exception $error)
     {
         $signup_error_message = "Oops! An unexpected error ocurred.";
     }
-
 ?>
 
-<form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
     <div>
         <label for="username">Username</label>
         <input type="text" name="username" required>
@@ -41,6 +46,6 @@
 
     <button type="submit" name="signup" value="submit">Signup</button>
 
-    <?php if ($signup_error_message) {echo "<p>" . $signup_error_message . "</p>";} ?>
+    <?php if ($signup_error_message) { echo "<p>" . $signup_error_message . "</p>"; } ?>
 </form>
 
