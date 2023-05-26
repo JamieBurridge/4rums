@@ -11,11 +11,18 @@ class User
 
     public function createUser($username, $password)
     {
-        $query = "INSERT INTO users (username, password) VALUES (:username, :password)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $password);
-        $stmt->execute();
+        try 
+        {
+            $query = "INSERT INTO users (username, password) VALUES (:username, :password)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', password_hash($password, PASSWORD_DEFAULT));
+            $stmt->execute();
+        }
+        catch (PDOException $error)
+        {
+            return array("error"=> "Oops! There was an error creating your account"); 
+        }
     }
 
     public function getUsers()
@@ -26,19 +33,31 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getSingleUser($username, $password) 
+    public function authenticateUser($username, $password) 
     {
-        $query = "SELECT * FROM users WHERE username = :username AND password = :password";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(":username", $username);
-        $stmt->bindParam(":password", $password);
-        $stmt->execute();
+        try 
+        {
+            $query = "SELECT * FROM users WHERE username = :username";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":username", $username);
+            $stmt->execute();
+    
+            $response = $stmt->fetch();
 
-        $response = $stmt->fetchAll();
+            if ($response) 
+            {
+                $hashedPassword = $response["password"];
 
-        if (sizeof($response) == 1) {
-            return array("username" => $response[0]["username"], "error" => null);
-        } else {
+                if (password_verify($password, $hashedPassword))
+                {
+                    return array("username" => $username, "error" => null);
+                }
+
+                return array("username" => null, "error" => "Oops, there was a problem logging in!");
+            }
+        }
+        catch (PDOException $error)
+        {
             return array("username" => null, "error" => "Oops, there has been an error!");
         }
     }

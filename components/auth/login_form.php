@@ -2,9 +2,6 @@
     require_once "database.php";
     require_once "models/User.php";
 
-    use Exception;
-    use PDOException;
-
     session_start();
 
     $user_model = new User($conn);
@@ -17,7 +14,7 @@
             $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $user = $user_model->getSingleUser($username, $password);
+            $user = $user_model->authenticateUser($username, $password);
 
             if ($user["username"]) 
             {
@@ -28,10 +25,6 @@
                 $login_error_message = $user["error"];
             }
         }
-    } 
-    catch (PDOException $error) 
-    {
-        $login_error_message = "Oops! An error ocurred when processing your request";
     } 
     catch (Exception $error) 
     {
@@ -52,6 +45,7 @@
     </div>
 
     <button type="submit" name="login" value="submit">Login</button>
+
+    <?php if ($login_error_message) {echo "<p>" . $login_error_message . "</p>";} ?>
 </form>
 
-<?php if ($login_error_message) {echo "<p>" . $login_error_message . "</p>";} ?>
