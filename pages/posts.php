@@ -2,6 +2,7 @@
     require_once "../database.php";
     require_once "../models/Post.php";
     require_once "../models/User.php";
+    require_once "../helpers/datetime.php";
 
     session_start();
 
@@ -65,6 +66,7 @@
                             </p>
                             <span>
                                 Posted by: " .$user["username"]. "
+                                at ".convertDateTime($post["created_at"])."
                             </span>
                         </div>
                         <hr>
