@@ -4,7 +4,7 @@ class User
 {
     private $db;
     private $login_error_message = "Oops, there was a problem logging in!";
-    private $signup_error_message = "Oops! There was an error creating your account";
+    private $signup_error_message = "Oops! There was an error creating your account.";
 
     public function __construct($db)
     {
@@ -35,6 +35,15 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getSingleUser($id)
+    {
+        $query = "SELECT id, username FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function authenticateUser($username, $password) 
     {
         try 
@@ -44,7 +53,7 @@ class User
             $stmt->bindParam(":username", $username);
             $stmt->execute();
     
-            $response = $stmt->fetch();
+            $response = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($response) 
             {
