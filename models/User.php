@@ -61,17 +61,17 @@ class User
 
                 if (password_verify($password, $hashedPassword))
                 {
-                    return array("username" => $username, "error" => null);
+                    return array("user_id" => $response["id"]);
                 }
 
-                return array("username" => null, "error" => $this->login_error_message);
+                return array("error" => $this->login_error_message);
             }
 
-            return array("username" => null, "error" => $this->login_error_message);
+            return array("error" => $this->login_error_message);
         }
         catch (PDOException $error)
         {
-            return array("username" => null, "error" => $this->login_error_message);
+            return array("error" => $this->login_error_message);
         }
     }
 }

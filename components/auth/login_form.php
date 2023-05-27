@@ -13,7 +13,7 @@
             $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $login_response = handleLogin($username, $password, $user_model, $login_error_message);
+            $login_response = handleLogin($username, $password, $user_model);
             $login_error_message = $login_response["error"];
         }
     } 

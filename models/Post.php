@@ -19,10 +19,29 @@
 
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
-            catch (PDOException)
+            catch (PDOException $error)
             {
                 return array("error" => "Oops! There was an error loading the posts");
             }
+        }
+
+        public function createPost($user_id, $topic_id, $subject, $content)
+        {
+            try 
+            {
+                $query = "INSERT INTO posts (user_id, topic_id, subject, content) VALUES (:user_id, :topic_id, :subject, :content)";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(":user_id", $user_id);
+                $stmt->bindParam(":topic_id", $topic_id);
+                $stmt->bindParam(":subject", $subject);
+                $stmt->bindParam(":content", $content);
+                $stmt->execute();
+            }
+            catch (PDOException $error)
+            {
+                return array("error" => "Oops! There was an error creating you post");
+            }
+
         }
     }
 
