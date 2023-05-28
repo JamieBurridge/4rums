@@ -42,6 +42,38 @@
 <?php require_once "../components/header.php" ?>
     <?php require_once "../components/navbar.php" ?>
 
+    <!-- Create post -->
+    <div class="modal" id="create-post-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            
+            <form action="<?php echo $_SERVER['PHP_SELF']."?topic=".$current_topic ?>" method="POST">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" name="subject" class="form-control">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea name="content" class="form-control" id="content" cols="30" rows="10" maxlength="200"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="post" value="post">Submit</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-post-modal">Create post</button>
+
     <!-- Show posts related to topic -->
     <section>
         <?php
@@ -76,25 +108,4 @@
             }
         ?>
     </section>
-
-    <hr>
-
-    <!-- Create post -->
-    <section>
-        <form action="<?php echo $_SERVER['PHP_SELF']."?topic=".$current_topic ?>" method="POST">
-            <div>
-                <label for="subject">Subject</label>
-                <input type="text" name="subject">
-            </div>
-
-            <div>
-                <label for="content">Content</label>
-                <textarea name="content" id="content" cols="30" rows="10" maxlength="200"></textarea>
-            </div>
-
-            <button type="submit" name="post" value="post">Post</button>
-        </form>
-    </section>
-
-
 <?php require_once "../components/footer.php" ?>
