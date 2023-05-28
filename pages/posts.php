@@ -90,19 +90,20 @@
 
                     echo
                     "
-                        <div>
-                            <h6>
-                                " .$post["subject"]. "
-                            </h6>
-                            <p>
-                                " .$post["content"]. "
-                            </p>
-                            <span>
-                                Posted by: " .$user["username"]. "
-                                at ".convertDateTime($post["created_at"])."
-                            </span>
+                        <div class='card mb-3'>
+                            <div class='card-body'>
+                                <h5 class='card-title'>
+                                    " .$post["subject"]. "
+                                </h5>
+                                <p class='card-text'>
+                                    " .$post["content"]. "
+                                </p>
+                                <span class='badge rounded-pill text-bg-primary'> 
+                                    Posted by: " .$user["username"]. "
+                                    at ".convertDateTime($post["created_at"])."
+                                </span>
+                            </div>
                         </div>
-                        <hr>
                     ";
                 }
             }
