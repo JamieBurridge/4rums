@@ -2,6 +2,7 @@
     require_once "../database.php";
     require_once "../models/Post.php";
     require_once "../models/User.php";
+    require_once "../models/Topic.php";
     require_once "../helpers/datetime.php";
 
     session_start();
@@ -13,6 +14,7 @@
     }
 
     $current_topic = $_GET["topic"];
+
     if (!$current_topic)
     {
         header("Location: /4rums/pages/board.php");
@@ -21,8 +23,10 @@
     
     $user_model = new User($conn);
     $post_model = new Post($conn);
+    $topic_model = new Topic($conn);
 
     $posts = $post_model->getTopicPosts($current_topic);
+    $current_topic_name = $topic_model->getSingleTopic($current_topic)["name"];
     
     // Post something
     if (isset($_POST["post"]))
@@ -74,8 +78,11 @@
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-post-modal">Create post</button>
 
+    <hr>
+
     <!-- Show posts related to topic -->
     <section>
+        <h4>Topic: <?php echo $current_topic_name ?></h4>
         <?php
             if ($posts["error"])
             {
