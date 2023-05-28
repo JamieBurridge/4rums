@@ -94,13 +94,16 @@
                 {   
                     // Get user who made the post
                     $user = $user_model->getSingleUser($post["user_id"]);
+                    $post_url = "/4rums/pages/post.php?post=".$post["id"];
 
                     echo
                     "
                         <div class='card mb-3'>
                             <div class='card-body'>
                                 <h5 class='card-title'>
-                                    " .$post["subject"]. "
+                                    <a href="."$post_url ".">
+                                        " .$post["subject"]. "
+                                    </a>
                                 </h5>
                                 <p class='card-text'>
                                     " .$post["content"]. "

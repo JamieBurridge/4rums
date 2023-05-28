@@ -39,12 +39,12 @@
                 {
                     foreach ($topics as $topic)
                     {
-                        $topicUrl = "/4rums/pages/posts.php?topic=".$topic["id"];
+                        $topic_url = "/4rums/pages/posts.php?topic=".$topic["id"];
     
                         echo 
                         "
                             <li>
-                                <a href='".$topicUrl."'>
+                                <a href='".$topic_url."'>
                                     " .$topic["name"]. "
                                 </a>
                             </li>

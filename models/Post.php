@@ -12,7 +12,7 @@
         {
             try 
             {
-                $query = "SELECT * from posts WHERE topic_id = :topic_id";
+                $query = "SELECT * from posts WHERE topic_id = :topic_id ORDER BY created_at DESC";
                 $stmt = $this->db->prepare($query);
                 $stmt->bindParam(":topic_id", $topic_id);
                 $stmt->execute();
@@ -21,7 +21,24 @@
             }
             catch (PDOException $error)
             {
-                return array("error" => "Oops! There was an error loading the posts");
+                return array("error" => "Oops! There was an error loading the posts.");
+            }
+        }
+
+        public function getSinglePost($id)
+        {
+            try
+            {
+                $query = "SELECT * FROM posts WHERE id = :id";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(":id", $id);
+                $stmt->execute();
+
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            catch (PDOException $error)
+            {
+                return array("error" => "Oops! There was an error loading the post.");
             }
         }
 
@@ -39,7 +56,7 @@
             }
             catch (PDOException $error)
             {
-                return array("error" => "Oops! There was an error creating you post");
+                return array("error" => "Oops! There was an error creating your post.");
             }
 
         }
