@@ -11,5 +11,5 @@
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-    <button type="submit" name="logout">Logout</button>
+    <button class="btn btn-outline-danger btn-sm" type="submit" name="logout">Logout</button>
 </form>

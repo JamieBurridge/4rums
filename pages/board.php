@@ -22,7 +22,7 @@
 <?php require_once "../components/header.php" ?>
 <?php require_once "../components/navbar.php" ?>
 <section>
-    <h1>Welcome, <?php if($user) {echo $user["username"];} ?> </h1>
+    <h1>Welcome, <?php if ($user) {echo $user["username"];} ?> </h1>
 
     <hr>
 
@@ -31,18 +31,25 @@
             <?php
                 $topics = $topic_model->getTopics();
 
-                foreach ($topics as $topic)
+                if ($topics["error"]) 
                 {
-                    $topicUrl = "/4rums/pages/posts.php?topic=".$topic["id"];
-
-                    echo 
-                    "
-                        <li>
-                            <a href='".$topicUrl."'>
-                                " .$topic["name"]. "
-                            </a>
-                        </li>
-                    ";
+                    echo $topics["error"];
+                }
+                else 
+                {
+                    foreach ($topics as $topic)
+                    {
+                        $topicUrl = "/4rums/pages/posts.php?topic=".$topic["id"];
+    
+                        echo 
+                        "
+                            <li>
+                                <a href='".$topicUrl."'>
+                                    " .$topic["name"]. "
+                                </a>
+                            </li>
+                        ";
+                    }
                 }
             ?>
         </ul>

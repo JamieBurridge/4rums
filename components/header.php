@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/4rums/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/4rums/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/4rums/css/bootstrap.css">
     <title>4rums</title>
 </head>
-<body>
+<body class="container-sm">
     

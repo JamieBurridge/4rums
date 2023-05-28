@@ -55,6 +55,7 @@
                 {   
                     // Get user who made the post
                     $user = $user_model->getSingleUser($post["user_id"]);
+
                     echo
                     "
                         <div>
