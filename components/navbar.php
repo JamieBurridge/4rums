@@ -15,16 +15,13 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-                <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Profile</a>
             </li>
             <li>
-                <a class="dropdown-item" href="#">    
-                    <?php require_once "../components/auth/logout_button.php"  ?>  
-                </a>
+              <?php require_once "../components/auth/logout_button.php"  ?>  
             </li>
           </ul>
         </li>
-
       </ul>
     </div>
   </div>

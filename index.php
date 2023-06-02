@@ -5,7 +5,7 @@
 
         <!-- Login form -->
         <h3>Login</h3>
-        <?php require_once "components/auth/login_form.php" ?> 
+        <?php require_once "components/auth/login_form.php" ?>
 
         <hr>
 
