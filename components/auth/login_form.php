@@ -1,14 +1,14 @@
 <?php
+    require_once "helpers/auth.php";
     require_once "database.php";
     require_once "models/User.php";
-    require_once "helpers/auth.php";
 
     $user_model = new User($conn);
     $login_error_message = "";
 
-    try 
+    try
     {
-        if (isset($_POST["login"])) 
+        if (isset($_POST["login"]))
         {
             $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -16,8 +16,8 @@
             $login_response = handleLogin($username, $password, $user_model);
             $login_error_message = $login_response["error"];
         }
-    } 
-    catch (Exception $error) 
+    }
+    catch (Exception $error)
     {
         $login_error_message = "Oops! An unexpected error occurred";
     }

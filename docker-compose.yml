@@ -1,0 +1,29 @@
+version: "3"
+services:
+  website:
+    build: .
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - database
+    links:
+      - database
+  database:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE=4rums
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev1234
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306

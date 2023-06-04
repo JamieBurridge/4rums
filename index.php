@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <?php require_once "components/header.php" ?>
     <section class="mt-2">
         <h1>4rums</h1>
