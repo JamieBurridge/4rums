@@ -9,8 +9,9 @@
 
         if ($user["user_id"])
         {
+            header("Location: /pages/board.php");
+            session_start();
             $_SESSION["user_id"] = $user["user_id"];
-            // header("Location: /4rums/pages/board.php");
             exit();
         }
         else

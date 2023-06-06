@@ -9,14 +9,14 @@
 
     if (!isset($_SESSION["user_id"]))
     {
-        header("Location: /4rums/index.php");
+        header("Location: /index.php");
         exit();
     }
 
     $current_topic_id = $_GET["topic"];
     if (!$current_topic_id)
     {
-        header("Location: /4rums/pages/board.php");
+        header("Location: /pages/board.php");
         exit();
     }
 
@@ -107,7 +107,7 @@
                 {
                     // Get user who made the post
                     $user = $user_model->getSingleUser($post["user_id"])["username"];
-                    $post_url = "/4rums/pages/post.php?post=".$post["id"];
+                    $post_url = "/pages/post.php?post=".$post["id"];
 
                     echo
                     "

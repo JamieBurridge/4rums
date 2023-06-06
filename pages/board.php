@@ -15,7 +15,7 @@
     }
     else 
     {
-        header("Location: /4rums/index.php");
+        header("Location: /index.php");
     }
 ?>
 
@@ -39,7 +39,7 @@
                 {
                     foreach ($topics as $topic)
                     {
-                        $topic_url = "/4rums/pages/posts.php?topic=".$topic["id"];
+                        $topic_url = "/pages/posts.php?topic=".$topic["id"];
     
                         echo 
                         "

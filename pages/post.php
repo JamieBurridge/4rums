@@ -9,14 +9,14 @@
 
     if (!isset($_SESSION["user_id"]))
     {
-        header("Location: /4rums/index.php");
+        header("Location: /index.php");
         exit();
     }
 
     $current_post_id = $_GET["post"];
     if (!$current_post_id)
     {
-        header("Location: /4rums/pages/board.php");
+        header("Location: /pages/board.php");
         exit();
     }
 
