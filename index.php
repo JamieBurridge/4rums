@@ -25,6 +25,7 @@
 
     // Signup
     $signup_error_message = "";
+    $signup_success_message = "";
     try 
     {
         if (isset($_POST["signup"])) 
@@ -34,15 +35,13 @@
 
             $new_user = $user_model->createUser($username, $password);
 
-            if ($new_user["error"])
+            if (is_array(array_key_exists("error", $new_user)))
             {
                 $signup_error_message = $new_user["error"];
             } 
             else 
             {
-                // Immediately login after creating an account
-                $signup_response = handleLogin($username, $password, $user_model, $signup_error_message);
-                $signup_error_message = $signup_response["error"];
+                $signup_success_message = "Sign up successful! Please login.";
             }
         }
     }

@@ -10,4 +10,5 @@
   <button type="submit" name="signup" class="btn btn-primary">Signup</button>
 
   <?php if ($signup_error_message) {echo "<p class='text-danger pt-2'>" . $signup_error_message . "</p>";} ?>
+  <?php if ($signup_success_message) {echo "<p class='text-success pt-2'>" . $signup_success_message . "</p>";} ?>
 </form>

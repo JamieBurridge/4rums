@@ -97,7 +97,7 @@
     <section>
         <h4>Topic: <?php echo $current_topic_name ?></h4>
         <?php
-            if ($posts["error"])
+            if (array_key_exists("error", $posts))
             {
                 echo "<p>".$posts["error"]."</p>";
             }

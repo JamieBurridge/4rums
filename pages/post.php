@@ -110,7 +110,7 @@
 
             <!-- Show replies -->
             <?php
-                if ($replies["error"])
+                if (array_key_exists("error", $replies))
                 {
                     echo "<p class='text-danger pt-2'>".$replies["error"]."</p>";
                 }

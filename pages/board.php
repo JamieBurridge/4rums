@@ -31,7 +31,7 @@
             <?php
                 $topics = $topic_model->getTopics();
 
-                if ($topics["error"]) 
+                if (array_key_exists("error", $topics)) 
                 {
                     echo $topics["error"];
                 }
