@@ -41,3 +41,19 @@ The database comes pre-loaded with a few users, topics, posts and replies.
 - /components --> HTML components
 - /helpers --> Helper PHP functions
 - /models --> Database models
+
+
+### Screenshots
+
+Login and signup screen
+![image](https://github.com/JamieBurridge/4rums/assets/80159413/13b8f3c0-7e24-40d6-91fa-f33a67ea49a2)
+
+Topics screen
+![image](https://github.com/JamieBurridge/4rums/assets/80159413/da41fcae-3923-4e2d-9f44-6d6581b41786)
+
+Posts from a topic
+![image](https://github.com/JamieBurridge/4rums/assets/80159413/27efdcad-b5ea-4a79-9e2b-366df876983a)
+
+Replies to post
+![image](https://github.com/JamieBurridge/4rums/assets/80159413/5eb36c73-bdde-4696-ae0b-64188240b618)
+
